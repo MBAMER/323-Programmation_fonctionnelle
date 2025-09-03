@@ -62,3 +62,17 @@ List<Movie> pltaformNetflix = frenchMovies
 
 
 pltaformNetflix.ForEach(o => Console.WriteLine(o.Title));
+
+
+Console.WriteLine("\nV2\n");
+// 4
+List<Movie> Version2 = frenchMovies
+  .Where(o => o.LanguageOptions.Contains("Français"))
+  .Where(o => o.StreamingPlatforms.Contains("Netflix"))
+  .Where(o => o.Year <= 2000)
+  .Where(o => o.Genre != "Comédie" && o.Genre != "Drame")
+  .Where(o => o.Rating <= 7)
+  .ToList();
+
+
+Version2.ForEach(o => Console.WriteLine(o.Title));
