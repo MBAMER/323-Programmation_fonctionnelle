@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Rando
 {
-    class Trackpoint
+    public class TrackPoint
     {
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-        public double Elevation { get; set; }
+        public double Latitude { get;  }
+        public double Longitude { get;  }
+        public double? Elevation { get;  }
 
-        public Trackpoint(double latitude, double longitude, double elevation)
+        public TrackPoint(double latitude, double longitude, double? elevation = null)
         {
             Latitude = latitude;
             Longitude = longitude;
@@ -20,4 +20,3 @@ namespace Rando
         }
     }
 }
-
