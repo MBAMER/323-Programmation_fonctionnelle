@@ -26,10 +26,12 @@ if (!filesAreValid)
 
 /// CHARGEMENT DES DONNÉES
 // TODO: 01 Charger le contenu texte du fichier A (indice: File.ReadAllLines...)
-string[] linesA = { File.ReadAllLines("C:/Users/pv23aha/Documents/GitHub/323-Programmation_fonctionnelle/Personnel/test formatif/diffit/v1") };
+string[] linesB = { File.ReadAllLines("C:/Users/pv23aha/Documents/GitHub/323-Programmation_fonctionnelle/Personnel/test formatif/diffit/v1") };
+
 
 // TODO: 02 Charger le contenu texte du fichier B (indice: File.ReadAllLines...)
 string[] linesB = { File.ReadAllLines("C:/Users/pv23aha/Documents/GitHub/323-Programmation_fonctionnelle/Personnel/test formatif/diffit/v2") };
+
 
 // TODO: 03 Vérifier que les fichier ont le même nombre de lignes
 if (true)
