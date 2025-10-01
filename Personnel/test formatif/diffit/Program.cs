@@ -26,7 +26,7 @@ if (!filesAreValid)
 
 /// CHARGEMENT DES DONNÉES
 // TODO: 01 Charger le contenu texte du fichier A (indice: File.ReadAllLines...)
-string[] linesB = { File.ReadAllLines("C:/Users/pv23aha/Documents/GitHub/323-Programmation_fonctionnelle/Personnel/test formatif/diffit/v1") };
+string[] linesA = { File.ReadAllLines("C:/Users/pv23aha/Documents/GitHub/323-Programmation_fonctionnelle/Personnel/test formatif/diffit/v1") };
 
 
 // TODO: 02 Charger le contenu texte du fichier B (indice: File.ReadAllLines...)
@@ -34,7 +34,7 @@ string[] linesB = { File.ReadAllLines("C:/Users/pv23aha/Documents/GitHub/323-Pro
 
 
 // TODO: 03 Vérifier que les fichier ont le même nombre de lignes
-if (true)
+if (linesA == linesB)
 {
     Console.WriteLine("Erreur: les fichiers n'ont pas le même nombre de ligne");
     Environment.Exit(-2);
@@ -44,11 +44,11 @@ Console.WriteLine(">Fichiers chargés avec succés");
 
 // TODO: 04 Définir les fonctions de nettoyage
 // Une fonction de nettoyage reçoit un texte (une ligne de fichier) et renvoie cette même ligne adaptée
-// Il existe la fonction Replace sur les string...
+// Il exist4e la fonction Replace sur les string...
 // Le caractère tabulation s’écrit \t
-Func<string, string> cleanSpaces = text => text;
-Func<string, string> cleanTabs = text => text;
-Func<string, string> enforceCase = text => text;
+Func<string, string> cleanSpaces = text => text.Replace(" ","");
+Func<string, string> cleanTabs = text => text.Replace("/t","");
+Func<string, string> enforceCase = text => text.ToLower();
 
 /// OPTIONS DE NETTOYAGE
 Console.WriteLine("Choisir les options:");
