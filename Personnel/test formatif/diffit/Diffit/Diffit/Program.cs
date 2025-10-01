@@ -26,11 +26,11 @@ if (!filesAreValid)
 
 /// CHARGEMENT DES DONNÉES
 // TODO: 01 Charger le contenu texte du fichier A (indice: File.ReadAllLines...)
-string[] linesA = File.ReadAllLines("C:/Users/pv23aha/Documents/GitHub/323-Programmation_fonctionnelle/Personnel/test formatif/diffit/v1");
+string[] linesA = File.ReadAllLines(pathA);
 
 
 // TODO: 02 Charger le contenu texte du fichier B (indice: File.ReadAllLines...
-string[] linesB = File.ReadAllLines("C:/Users/pv23aha/Documents/GitHub/323-Programmation_fonctionnelle/Personnel/test formatif/diffit/v2") ;
+string[] linesB = File.ReadAllLines(pathB) ;
 
 
 // TODO: 03 Vérifier que les fichier ont le même nombre de lignes
@@ -46,8 +46,8 @@ Console.WriteLine(">Fichiers chargés avec succés");
 // Une fonction de nettoyage reçoit un texte (une ligne de fichier) et renvoie cette même ligne adaptée
 // Il exist4e la fonction Replace sur les string...
 // Le caractère tabulation s’écrit \t
-Func<string, string> cleanSpaces = text => text.Replace(" ","");
-Func<string, string> cleanTabs = text => text.Replace("/t","");
+Func<string, string> cleanSpaces = text => text.Trim();
+Func<string, string> cleanTabs = text => text.Replace("\t","");
 Func<string, string> enforceCase = text => text.ToLower();
 
 /// OPTIONS DE NETTOYAGE
@@ -69,11 +69,24 @@ if(ignoreSpaces)
     linesA = linesA.Select(p => cleanSpaces(p)).ToArray();
     linesB = linesB.Select(p => cleanSpaces(p)).ToArray();
 }
+
+if (ignoreTabs)
+{
+    linesA = linesA.Select(p => cleanTabs(p)).ToArray();
+    linesB = linesB.Select(p => cleanTabs(p)).ToArray();
+}
+
+if (ignoreCase)
+{
+    linesA = linesA.Select(p => enforceCase(p)).ToArray();
+    linesB = linesB.Select(p => enforceCase(p)).ToArray();
+}
+linesA.ToList().ForEach(p => Console.WriteLine(p));
 // TODO: 06 Créer et remplir une liste de LinesComparison à partir de linesA et linesB
 List<LinesComparison> comparisons = new List<LinesComparison> {  };
 
 // TODO: 07 Sélectionner les lignes qui ont des différences
-var diffLines = new Liste<LinesComparison>();
+var diffLines = new List<LinesComparison>();
 
 // TODO: 08 Afficher le nombre de lignes identiques et différentes entre les 2 fichiers
 
