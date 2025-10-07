@@ -83,12 +83,23 @@ if (ignoreCase)
 }
 linesA.ToList().ForEach(p => Console.WriteLine(p));
 // TODO: 06 Créer et remplir une liste de LinesComparison à partir de linesA et linesB
-List<LinesComparison> comparisons = new List<LinesComparison> {  };
+List<LinesComparison> comparisons = linesA
+    .Select((line, index) =>
+        new LinesComparison()
+        {
+            Number = index,
+            ContentA = line,
+            ContentB = linesB[index]
+        }
+    ).ToList();
+
 
 // TODO: 07 Sélectionner les lignes qui ont des différences
-var diffLines = new List<LinesComparison>();
+var diffLines = comparisons.Where(diffLines => diffLines.ContentA != diffLines.ContentB).ToList();
 
 // TODO: 08 Afficher le nombre de lignes identiques et différentes entre les 2 fichiers
+int matchingLinesCount = linesA.Length - diffLines.Count();
+Console.WriteLine($"Lignes identiques: {matchingLinesCount}\nLignes différentes: {diffLines.Count()}");
 
 // TODO: 09 Définir une fonction qui compte les différences (caractères différents) entre deux textes (sera utilisé pour les 2 lignes de A et B...)
 // Pour info/rappel, la fonction Zip (comme une fermeture éclair) permet d’associer deux listes.
@@ -96,7 +107,10 @@ var diffLines = new List<LinesComparison>();
 // Ainsi "12345".Zip("ABCDE", (a, b) => $"{a}{b}").ToList().ForEach(Console.Write);//1A2B3C4D5E
 // ATTENTION: zip ne prend que le nombre d’éléments minimum commun entre 2 listes...
 // Ceci implique une correction: en plus du nombre de différences, il faut ajouter la différence du nombre de caractères entre les deux...
-Func<LinesComparison, int> countVariations = _ => -1;
+Func<LinesComparison, int> countVariations =
+        (comparison) =>
+    comparison.ContentA.Zip(comparison.ContentB, (charA, charB) => (charA == charB ? 0 : 1))
+    .Sum() + comparison.LengthVariation;
 
 // TODO: 10 Afficher pour chaque ligne différente, le nombre de variations
 
@@ -115,6 +129,9 @@ Func<LinesComparison, int> countVariations = _ => -1;
 // Le pendant de ReadAllLines est WriteAllLines
 Console.Write("\n\nSPECIAL FEATURE: Clé de chiffrement [1-25]: ");
 byte key = Convert.ToByte(Console.ReadLine());
+
+var cipheredA = linesA.Select(line => string.Join("", line.Select(letter => (char)(letter + key))));
+File.WriteAllLines("cipheredA.txt", cipheredA);
 
 public class LinesComparison
 {
